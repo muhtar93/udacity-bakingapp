@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -37,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewBaking;
     private BakingAdapter bakingAdapter;
     private ProgressDialog progressDialog;
+
+    private String name, servings;
+    private String quantity, measure, ingredient;
+    private String shortDescription, description, videoURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,11 +113,35 @@ public class MainActivity extends AppCompatActivity {
 
                 Baking baking = new Baking();
 
-                String name = jsonObjectBaking.getString("name").toString();
-                String servings = jsonObjectBaking.getString("servings").toString();
+                name = jsonObjectBaking.getString("name");
+                servings = jsonObjectBaking.getString("servings");
+
+                JSONArray jsonArrayIngredients = jsonObjectBaking.getJSONArray("ingredients");
+                String ingredients = jsonArrayIngredients.toString();
+                for (int j = 0; j < jsonArrayIngredients.length(); j++){
+                    JSONObject jsonObjectIngredients = jsonArrayIngredients.getJSONObject(j);
+                    quantity = jsonObjectIngredients.getString("quantity");
+                    measure = jsonObjectIngredients.getString("measure");
+                    ingredient = jsonObjectIngredients.getString("ingredient");
+                }
+
+                JSONArray jsonArraySteps = jsonObjectBaking.getJSONArray("steps");
+                for (int k = 0; k < jsonArraySteps.length(); k++){
+                    JSONObject jsonObjectSteps = jsonArraySteps.getJSONObject(k);
+                    shortDescription = jsonObjectSteps.getString("shortDescription");
+                    description = jsonObjectSteps.getString("description");
+                    videoURL = jsonObjectSteps.getString("videoURL");
+                }
 
                 baking.setName(name);
                 baking.setServings(servings);
+                baking.setQuantity(quantity);
+                baking.setMeasure(measure);
+                baking.setIngredient(ingredient);
+                baking.setShortDescription(shortDescription);
+                baking.setDescription(description);
+                baking.setVideoURL(videoURL);
+                baking.setIngredients(ingredients);
 
                 bakingList.add(baking);
             }
