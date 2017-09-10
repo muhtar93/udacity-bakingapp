@@ -21,7 +21,6 @@
         <activity android:name=".StepsActivity" />
         <activity android:name=".DetailIngredientsActivity" />
         <activity android:name=".DetailVideoActivity" />
-        <activity android:name=".PagerCookingActivity"></activity>
     </application>
 
 </manifest>
