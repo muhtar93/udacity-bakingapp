@@ -14,6 +14,7 @@ public class Baking {
     public String description;
     public String videoURL;
     public String ingredients;
+    public String steps;
 
     public Baking(){}
 
@@ -87,5 +88,13 @@ public class Baking {
 
     public String getIngredients() {
         return ingredients;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
+    }
+
+    public String getSteps() {
+        return steps;
     }
 }

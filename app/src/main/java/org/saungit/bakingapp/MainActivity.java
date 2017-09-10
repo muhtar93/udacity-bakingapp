@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private String name, servings;
-    private String quantity, measure, ingredient;
-    private String shortDescription, description, videoURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewBaking.setLayoutManager(layoutManager);
         recyclerViewBaking.setItemAnimator(new DefaultItemAnimator());
         recyclerViewBaking.setAdapter(bakingAdapter);
+
+        getSupportActionBar().setTitle("Baking Time");
 
         fetchDataCooking();
     }
@@ -118,30 +118,14 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONArray jsonArrayIngredients = jsonObjectBaking.getJSONArray("ingredients");
                 String ingredients = jsonArrayIngredients.toString();
-                for (int j = 0; j < jsonArrayIngredients.length(); j++){
-                    JSONObject jsonObjectIngredients = jsonArrayIngredients.getJSONObject(j);
-                    quantity = jsonObjectIngredients.getString("quantity");
-                    measure = jsonObjectIngredients.getString("measure");
-                    ingredient = jsonObjectIngredients.getString("ingredient");
-                }
 
                 JSONArray jsonArraySteps = jsonObjectBaking.getJSONArray("steps");
-                for (int k = 0; k < jsonArraySteps.length(); k++){
-                    JSONObject jsonObjectSteps = jsonArraySteps.getJSONObject(k);
-                    shortDescription = jsonObjectSteps.getString("shortDescription");
-                    description = jsonObjectSteps.getString("description");
-                    videoURL = jsonObjectSteps.getString("videoURL");
-                }
+                String steps = jsonArraySteps.toString();
 
                 baking.setName(name);
                 baking.setServings(servings);
-                baking.setQuantity(quantity);
-                baking.setMeasure(measure);
-                baking.setIngredient(ingredient);
-                baking.setShortDescription(shortDescription);
-                baking.setDescription(description);
-                baking.setVideoURL(videoURL);
                 baking.setIngredients(ingredients);
+                baking.setSteps(steps);
 
                 bakingList.add(baking);
             }

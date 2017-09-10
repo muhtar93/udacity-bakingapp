@@ -49,7 +49,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView quantity, measure, ingredient;
-        private ItemClickListener clickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
