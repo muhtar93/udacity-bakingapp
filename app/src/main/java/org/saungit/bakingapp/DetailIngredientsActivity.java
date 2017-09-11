@@ -17,9 +17,14 @@ import org.saungit.bakingapp.model.Baking;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailIngredientsActivity extends AppCompatActivity {
+    @BindView(R.id.recyclerViewBaking) RecyclerView recyclerViewBaking;
+
     private List<Baking> bakingList = new ArrayList<>();
-    private RecyclerView recyclerViewBaking;
+
     private IngredientsAdapter ingredientsAdapter;
 
     @Override
@@ -27,10 +32,10 @@ public class DetailIngredientsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_ingredients);
 
+        ButterKnife.bind(this);
+
         Intent intent = getIntent();
         String ingredients = intent.getStringExtra("ingredients");
-
-        recyclerViewBaking = (RecyclerView) findViewById(R.id.recyclerViewBaking);
 
         ingredientsAdapter = new IngredientsAdapter(bakingList, DetailIngredientsActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(DetailIngredientsActivity.this);

@@ -3,21 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="/Users/muhtar/.android/build-cache/07bfb3432ddbebcf3a831cf2b3a6a399f1a52403/output/jars/classes.jar"
+        jar="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="82176abeb658359d6e491166a22ab9d21c3704bc">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c750a5b3d2556fee19b72d7960698f384c617a8a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/muhtar/.android/build-cache/712162bf68c79e0d917309be242c28b5c9814e58/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="31abcff1d93243e1d25afda575266ca6219fadd1">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b79177e25051fd62b8ed204c3eeba24683f0057b/classes.dex" />
+        sha1="62a373ea8a4c8fc83958995da0e2ab3a1b68d6c8">
+        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_f01dee22817257cb6b0ab09e1b09053be6cf7b49/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -27,69 +18,6 @@
         revision="26.0.1"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_479dd7b1217b6a2580c8663d75670e7f7a266cce/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/muhtar/.android/build-cache/7b05731db22a9cb5ac4b78eedf5368a3d656863c/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="3ecb9d2aad9a03dd8d0914b715cc1fc11d942c6c">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_808424f3c59fd414fc0900f7b25be97427d4b02d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/muhtar/.android/build-cache/d35a18577548040fdb360b70a93788c88d6b7f12/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="52f4541e66a53c22179655d7e9c6fccf12cba86a">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_30538e8c7c007a0da8e7396d471f2d74390b178a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/muhtar/.android/build-cache/226322e08855ff0ae262ba7dc2cfeedf5a279495/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="1a22d14a4ee12a1fc2e765eb280d94ea73efa630">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9a079182194ff73db68e7c5b04d2b569270c82c4/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/muhtar/.android/build-cache/67ef58e59c79015d189e366080f8192be8835dca/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="cfc67519fb914bc50f2434bad36ed2001412777a">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8db7c2ed2fb3cf16992b6529c862f005c234ae2e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="6200a6f6ab72b1768f3b653f2d4b52c66f49f3b3">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_f01dee22817257cb6b0ab09e1b09053be6cf7b49/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/muhtar/.android/build-cache/4458c9329adce88671304badcddf0aaee2d82405/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="bc987989a5b6a23cc00d436f97cbf82e644c739d">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b786205c7afc141f06fe27734424559bb2d691fd/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/muhtar/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
-        <dex dex="/Users/muhtar/Public/TugasKuliah/udacity-bakingapp/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-1.0.19_5b78e03bebd43c40c294ee9e4133f84b61d7360b/classes.dex" />
     </item>
 
 </items>

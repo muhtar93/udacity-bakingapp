@@ -15,6 +15,9 @@ import org.saungit.bakingapp.model.Baking;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Muhtar on 23/05/2017.
  */
@@ -48,14 +51,14 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView quantity, measure, ingredient;
+        @BindView(R.id.textQty) TextView quantity;
+        @BindView(R.id.textMeasure) TextView measure;
+        @BindView(R.id.textIngredient) TextView ingredient;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            quantity = (TextView) itemView.findViewById(R.id.textQty);
-            measure = (TextView) itemView.findViewById(R.id.textMeasure);
-            ingredient = (TextView) itemView.findViewById(R.id.textIngredient);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

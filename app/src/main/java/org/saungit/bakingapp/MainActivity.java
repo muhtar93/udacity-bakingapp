@@ -2,11 +2,12 @@ package org.saungit.bakingapp;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -31,20 +32,28 @@ import org.saungit.bakingapp.model.Baking;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.recyclerViewBaking) RecyclerView recyclerViewBaking;
+    @BindView(R.id.frameLayout) FrameLayout frameLayout;
+
     private List<Baking> bakingList = new ArrayList<>();
-    private RecyclerView recyclerViewBaking;
+
     private BakingAdapter bakingAdapter;
+
     private ProgressDialog progressDialog;
 
-    private String name, servings;
+    private String name;
+    private String servings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerViewBaking = (RecyclerView) findViewById(R.id.recyclerViewBaking);
+        ButterKnife.bind(this);
 
         bakingAdapter = new BakingAdapter(bakingList, MainActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
@@ -74,25 +83,24 @@ public class MainActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError volleyError) {
+                                String errorMessage="";
                                 if (volleyError instanceof NetworkError) {
-                                    Toast.makeText(MainActivity.this, "check your internet connection", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
+                                    errorMessage="check your internet connection";
                                 } else if (volleyError instanceof ServerError) {
-                                    Toast.makeText(MainActivity.this, "server not found", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
+                                    errorMessage="server not found";
                                 } else if (volleyError instanceof AuthFailureError) {
-                                    Toast.makeText(MainActivity.this, "check your internet connection", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
+                                    errorMessage="check your internet connection";
                                 } else if (volleyError instanceof ParseError) {
-                                    Toast.makeText(MainActivity.this, "fetching data failed", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
+                                    errorMessage="fetching data failed";
                                 } else if (volleyError instanceof NoConnectionError) {
-                                    Toast.makeText(MainActivity.this, "check your internet connection", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
+                                    errorMessage="check your internet connection";
                                 } else if (volleyError instanceof TimeoutError) {
-                                    Toast.makeText(MainActivity.this, "timeout connection", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
+                                    errorMessage="timeout connection";
                                 }
+                                Snackbar snackbar = Snackbar
+                                        .make(frameLayout, errorMessage, Snackbar.LENGTH_LONG);
+                                snackbar.show();
+                                progressDialog.dismiss();
                             }
                         });
 
@@ -115,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                 name = jsonObjectBaking.getString("name");
                 servings = jsonObjectBaking.getString("servings");
+                String image = jsonObjectBaking.getString("image");
 
                 JSONArray jsonArrayIngredients = jsonObjectBaking.getJSONArray("ingredients");
                 String ingredients = jsonArrayIngredients.toString();
@@ -124,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
                 baking.setName(name);
                 baking.setServings(servings);
+                baking.setImage(image);
                 baking.setIngredients(ingredients);
                 baking.setSteps(steps);
 

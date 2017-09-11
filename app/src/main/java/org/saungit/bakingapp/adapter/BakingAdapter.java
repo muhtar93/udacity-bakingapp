@@ -6,7 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.saungit.bakingapp.R;
 import org.saungit.bakingapp.StepsActivity;
@@ -14,6 +18,9 @@ import org.saungit.bakingapp.listener.ItemClickListener;
 import org.saungit.bakingapp.model.Baking;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Muhtar on 23/05/2017.
@@ -39,6 +46,12 @@ public class BakingAdapter extends RecyclerView.Adapter<BakingAdapter.ViewHolder
         final Baking baking = bakingList.get(position);
         holder.name.setText(baking.getName());
         holder.servings.setText(baking.getServings());
+        Glide.with(context).load(baking.getImage())
+                .thumbnail(0.5f)
+                .crossFade()
+                .error(R.drawable.chef)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.imageView);
         holder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,14 +70,16 @@ public class BakingAdapter extends RecyclerView.Adapter<BakingAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView name, servings;
+        @BindView(R.id.textNameBaking) TextView name;
+        @BindView(R.id.textServings) TextView servings;
+        @BindView(R.id.image) ImageView imageView;
+
         private ItemClickListener clickListener;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            name = (TextView) itemView.findViewById(R.id.textNameBaking);
-            servings = (TextView) itemView.findViewById(R.id.textServings);
+            ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(this);
         }

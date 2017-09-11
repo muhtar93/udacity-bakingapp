@@ -21,24 +21,32 @@ import org.saungit.bakingapp.model.Baking;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class StepsActivity extends AppCompatActivity {
-    private List<Baking> bakingList = new ArrayList<>();
-    private RecyclerView recyclerViewBaking;
+    @BindView(R.id.recyclerViewBaking) RecyclerView recyclerViewBaking;
+    @BindView(R.id.linearLayout) LinearLayout linearLayout;
     private StepsAdapter stepsAdapter;
 
+    private List<Baking> bakingList = new ArrayList<>();
+
     private String name;
+    private String ingredients;
+    private String steps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
 
+        ButterKnife.bind(this);
+
         Intent intent = getIntent();
-        final String ingredients = intent.getStringExtra("ingredients");
-        final String steps = intent.getStringExtra("steps");
+        ingredients = intent.getStringExtra("ingredients");
+        steps = intent.getStringExtra("steps");
         name = intent.getStringExtra("name");
 
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,8 +55,6 @@ public class StepsActivity extends AppCompatActivity {
                 startActivity(detailIngredients);
             }
         });
-
-        recyclerViewBaking = (RecyclerView) findViewById(R.id.recyclerViewBaking);
 
         stepsAdapter = new StepsAdapter(bakingList, StepsActivity.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(StepsActivity.this);
@@ -73,9 +79,11 @@ public class StepsActivity extends AppCompatActivity {
                 String shortDescription = jsonObjectBaking.getString("shortDescription");
                 String description = jsonObjectBaking.getString("description");
                 String videoURL = jsonObjectBaking.getString("videoURL");
+                String thumbnailURL = jsonObjectBaking.getString("thumbnailURL");
 
                 baking.setShortDescription(shortDescription);
                 baking.setDescription(description);
+                baking.setThumbnailURL(thumbnailURL);
                 baking.setVideoURL(videoURL);
                 baking.setName(name);
 

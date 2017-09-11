@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -22,11 +21,16 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailVideoActivity extends AppCompatActivity {
 
-    private SimpleExoPlayerView playerView;
+    @BindView(R.id.video_view) SimpleExoPlayerView playerView;
+    @BindView(R.id.textDescription) TextView textDescription;
+
     private SimpleExoPlayer player;
-    private TextView textDescription;
+
     private String videoURL;
     private long playbackPosition;
     private int currentWindow;
@@ -37,23 +41,21 @@ public class DetailVideoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_video);
 
+        ButterKnife.bind(this);
+
         Intent intent = getIntent();
         videoURL = intent.getStringExtra("videoURL");
         String name = intent.getStringExtra("name");
         String description = intent.getStringExtra("description");
-        Log.d("videoURL",videoURL);
 
         getSupportActionBar().setTitle(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        playerView = (SimpleExoPlayerView) findViewById(R.id.video_view);
-        textDescription = (TextView) findViewById(R.id.textDescription);
 
         textDescription.setText(description);
     }
 
     private void initializePlayer() {
-        if (videoURL.equals("")){
+        if (videoURL.isEmpty()){
             playerView.setVisibility(View.GONE);
         } else {
             player = ExoPlayerFactory.newSimpleInstance(
