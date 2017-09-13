@@ -12,9 +12,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import org.saungit.bakingapp.DetailVideoActivity;
+import org.saungit.bakingapp.activity.DetailVideoActivity;
 import org.saungit.bakingapp.R;
-import org.saungit.bakingapp.StepsActivity;
 import org.saungit.bakingapp.listener.ItemClickListener;
 import org.saungit.bakingapp.model.Baking;
 

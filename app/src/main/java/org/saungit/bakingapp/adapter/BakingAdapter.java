@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.saungit.bakingapp.R;
-import org.saungit.bakingapp.StepsActivity;
+import org.saungit.bakingapp.activity.StepsActivity;
 import org.saungit.bakingapp.listener.ItemClickListener;
 import org.saungit.bakingapp.model.Baking;
 

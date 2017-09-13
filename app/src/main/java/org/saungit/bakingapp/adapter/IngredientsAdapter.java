@@ -1,7 +1,6 @@
 package org.saungit.bakingapp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.saungit.bakingapp.R;
-import org.saungit.bakingapp.StepsActivity;
-import org.saungit.bakingapp.listener.ItemClickListener;
 import org.saungit.bakingapp.model.Baking;
 
 import java.util.List;
