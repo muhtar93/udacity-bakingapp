@@ -56,9 +56,9 @@ public class BakingAdapter extends RecyclerView.Adapter<BakingAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent steps = new Intent(context, StepsActivity.class);
-                steps.putExtra("name", baking.getName());
+                /*steps.putExtra("name", baking.getName());
                 steps.putExtra("ingredients", baking.getIngredients());
-                steps.putExtra("steps", baking.getSteps());
+                steps.putExtra("steps", baking.getSteps());*/
                 context.startActivity(steps);
             }
         });

@@ -8,8 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import org.saungit.bakingapp.activity.MainActivity;
 import org.saungit.bakingapp.R;
+import org.saungit.bakingapp.activity.MainActivity;
 
 public class BakingAppWidgetProvider extends AppWidgetProvider {
 

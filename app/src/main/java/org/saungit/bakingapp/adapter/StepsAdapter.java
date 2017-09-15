@@ -1,94 +1,92 @@
 package org.saungit.bakingapp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.squareup.picasso.Picasso;
 
-import org.saungit.bakingapp.activity.DetailVideoActivity;
 import org.saungit.bakingapp.R;
-import org.saungit.bakingapp.listener.ItemClickListener;
-import org.saungit.bakingapp.model.Baking;
+import org.saungit.bakingapp.model.Step;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ArticleViewHolder> {
 
-/**
- * Created by Muhtar on 23/05/2017.
- */
+    final private ListItemClickListener mOnClickListener;
+    final private ArrayList<Step> steps;
 
-public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ViewHolder> {
-    private List<Baking> bakingList;
-    private Context context;
+    public interface ListItemClickListener {
+        void onListItemClick(int clickedItemIndex);
+    }
 
-    public StepsAdapter(List<Baking> agendaList, Context context) {
-        this.bakingList = agendaList;
-        this.context = context;
+    public StepsAdapter(ListItemClickListener listener, ArrayList<Step> steps) {
+        mOnClickListener = listener;
+        this.steps = steps;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_steps, parent, false);
-        return new ViewHolder(itemView);
+    public ArticleViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        Context context = viewGroup.getContext();
+        int layoutIdForListItem = R.layout.list_item;
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        boolean shouldAttachToParentImmediately = false;
+
+        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+        ArticleViewHolder viewHolder = new ArticleViewHolder(view);
+
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final Baking baking = bakingList.get(position);
-        holder.shortDesc.setText(baking.getShortDescription());
-        Glide.with(context).load(baking.getThumbnailURL())
-                .thumbnail(0.5f)
-                .crossFade()
-                .error(R.drawable.chef)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.imageView);
-        holder.setClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent steps = new Intent(context, DetailVideoActivity.class);
-                steps.putExtra("name", baking.getName());
-                steps.putExtra("videoURL", baking.getVideoURL());
-                steps.putExtra("description", baking.getDescription());
-                context.startActivity(steps);
-            }
-        });
+    public void onBindViewHolder(ArticleViewHolder holder, int position) {
+        holder.onBind(position);
     }
 
     @Override
     public int getItemCount() {
-        return bakingList.size();
+        return steps.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        @BindView(R.id.textShortDesc) TextView shortDesc;
-        @BindView(R.id.image) ImageView imageView;
+    class ArticleViewHolder extends RecyclerView.ViewHolder
+            implements OnClickListener {
 
-        private ItemClickListener clickListener;
+        ImageView icon;
+        TextView name;
+        TextView servings;
 
-        public ViewHolder(View itemView) {
+
+        public ArticleViewHolder(View itemView) {
             super(itemView);
 
-            ButterKnife.bind(this, itemView);
-
+            icon = (ImageView) itemView.findViewById(R.id.icon);
+            name = (TextView) itemView.findViewById(R.id.name);
+            servings = (TextView) itemView.findViewById(R.id.servings);
             itemView.setOnClickListener(this);
         }
 
-        public void setClickListener(ItemClickListener itemClickListener) {
-            this.clickListener = itemClickListener;
+        void onBind(int position) {
+            if (!steps.isEmpty()) {
+                if(!steps.get(position).getThumbnailURL().isEmpty()) {
+                    Picasso.with(itemView.getContext()).load(steps.get(position).getThumbnailURL()).error(R.drawable.chef).into(icon);
+                }else{
+                    icon.setImageResource(R.drawable.chef);
+                }
+                name.setText(steps.get(position).getShortDescription());
+                servings.setText(itemView.getContext().getString(R.string.step)+" "+steps.get(position).getId());
+            }
         }
 
         @Override
-        public void onClick(View view) {
-            clickListener.onClick(view);
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            mOnClickListener.onListItemClick(clickedPosition);
         }
     }
 }

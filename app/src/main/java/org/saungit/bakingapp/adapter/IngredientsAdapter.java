@@ -8,54 +8,63 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.saungit.bakingapp.R;
-import org.saungit.bakingapp.model.Baking;
+import org.saungit.bakingapp.model.Ingredient;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-/**
- * Created by Muhtar on 23/05/2017.
- */
+public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ArticleViewHolder> {
 
-public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
-    private List<Baking> bakingList;
-    private Context context;
+    final private ArrayList<Ingredient> ingredients;
 
-    public IngredientsAdapter(List<Baking> agendaList, Context context) {
-        this.bakingList = agendaList;
-        this.context = context;
+    public IngredientsAdapter(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_ingredients, parent, false);
-        return new ViewHolder(itemView);
+    public ArticleViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        Context context = viewGroup.getContext();
+        int layoutIdForListItem = R.layout.ingredient_item;
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        boolean shouldAttachToParentImmediately = false;
+
+        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+        ArticleViewHolder viewHolder = new ArticleViewHolder(view);
+
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final Baking baking = bakingList.get(position);
-        holder.quantity.setText(baking.getQuantity());
-        holder.measure.setText(baking.getMeasure());
-        holder.ingredient.setText(baking.getIngredient());
+    public void onBindViewHolder(ArticleViewHolder holder, int position) {
+        holder.onBind(position);
     }
 
     @Override
     public int getItemCount() {
-        return bakingList.size();
+        return ingredients.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textQty) TextView quantity;
-        @BindView(R.id.textMeasure) TextView measure;
-        @BindView(R.id.textIngredient) TextView ingredient;
+    class ArticleViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(View itemView) {
+        TextView ingredient;
+        TextView quantity;
+        TextView measure;
+
+
+        public ArticleViewHolder(View itemView) {
             super(itemView);
+            ingredient = (TextView) itemView.findViewById(R.id.ingredient);
+            measure = (TextView) itemView.findViewById(R.id.measure);
+            quantity = (TextView) itemView.findViewById(R.id.quantity);
+        }
 
-            ButterKnife.bind(this, itemView);
+        void onBind(int position) {
+            if (!ingredients.isEmpty()) {
+                ingredient.setText(ingredients.get(position).getIngredient());
+                measure.setText(ingredients.get(position).getMeasure());
+                quantity.setText(ingredients.get(position).getQuantity()+"");
+            }
         }
     }
 }
