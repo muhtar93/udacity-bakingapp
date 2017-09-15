@@ -79,7 +79,7 @@ public class BakingAdapter extends RecyclerView.Adapter<BakingAdapter.ViewHolder
         public void onClick(View view) {
             int position = getAdapterPosition();
             Intent intent = new Intent(context, StepsActivity.class);
-            intent.putExtra("item",position);
+            intent.putExtra("data",position);
             context.startActivity(intent);
         }
     }

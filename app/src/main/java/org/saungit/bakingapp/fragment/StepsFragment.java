@@ -40,7 +40,7 @@ public class StepsFragment extends Fragment implements StepsAdapter.ListItemClic
         stepsRecyclerView = (RecyclerView) rootView.findViewById(R.id.stepslist);
         textIngredient = (TextView) rootView.findViewById(R.id.textIngredient);
         stepsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        index = getActivity().getIntent().getExtras().getInt(getString(R.string.extra));
+        index = getActivity().getIntent().getExtras().getInt("data");
         steps = MainFragment.stepArrayList.get(index).getStepsArrayList();
         stepsAdapter = new StepsAdapter(this, steps);
         stepsRecyclerView.setAdapter(stepsAdapter);
@@ -61,7 +61,7 @@ public class StepsFragment extends Fragment implements StepsAdapter.ListItemClic
     public void onListItemClick(int clickedItemIndex) {
         if (!MainActivity.isMultiPane) {
             Intent intent = new Intent(getActivity(), StepsDetailActivity.class);
-            intent.putExtra("item", clickedItemIndex);
+            intent.putExtra("data", clickedItemIndex);
             startActivity(intent);
         } else {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

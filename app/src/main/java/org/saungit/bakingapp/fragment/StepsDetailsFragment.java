@@ -67,7 +67,7 @@ public class StepsDetailsFragment extends Fragment implements ExoPlayer.EventLis
         initializePlayer(Uri.parse(steps.get(index).getVideoURL()));
 
         if (!isMultiPane) {
-            index = getActivity().getIntent().getExtras().getInt("item");
+            index = getActivity().getIntent().getExtras().getInt("data");
         }
 
         getActivity().setTitle(steps.get(index).getShortDescription());

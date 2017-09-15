@@ -13,20 +13,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            if (findViewById(R.id.bakesGrid) != null) {
+            if (findViewById(R.id.bakingGrid) != null) {
                 isMultiPane = true;
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 MainFragment mainFragment = new MainFragment();
                 fragmentManager.beginTransaction()
-                        .add(R.id.bakesGrid, mainFragment)
+                        .add(R.id.bakingGrid, mainFragment)
                         .commit();
             } else {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 MainFragment mainFragment = new MainFragment();
                 fragmentManager.beginTransaction()
-                        .add(R.id.bakesframe, mainFragment)
+                        .add(R.id.bakingframe, mainFragment)
                         .commit();
             }
         }
