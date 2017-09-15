@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import org.saungit.bakingapp.R;
-import org.saungit.bakingapp.fragment.BakesFragment;
+import org.saungit.bakingapp.fragment.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static boolean isMultiPane = false;
@@ -18,15 +18,15 @@ public class MainActivity extends AppCompatActivity {
             if (findViewById(R.id.bakesGrid) != null) {
                 isMultiPane = true;
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                BakesFragment bakesFragment = new BakesFragment();
+                MainFragment mainFragment = new MainFragment();
                 fragmentManager.beginTransaction()
-                        .add(R.id.bakesGrid, bakesFragment)
+                        .add(R.id.bakesGrid, mainFragment)
                         .commit();
             } else {
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                BakesFragment bakesFragment = new BakesFragment();
+                MainFragment mainFragment = new MainFragment();
                 fragmentManager.beginTransaction()
-                        .add(R.id.bakesframe, bakesFragment)
+                        .add(R.id.bakesframe, mainFragment)
                         .commit();
             }
         }

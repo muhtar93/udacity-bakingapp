@@ -14,24 +14,40 @@ public class Baking {
     private String servings;
     private String image;
 
-    public Baking(JSONObject bake_jason) {
+    public Baking(JSONObject jsonObjectBaking) {
         try {
-            this.name = bake_jason.getString("name");
+            this.name = jsonObjectBaking.getString("name");
             this.ingredients = new ArrayList<>();
-            JSONArray ingredientsJA = bake_jason.getJSONArray("ingredients");
+            JSONArray ingredientsJA = jsonObjectBaking.getJSONArray("ingredients");
             for (int i = 0; i < ingredientsJA.length(); i++) {
                 ingredients.add(new Ingredient(ingredientsJA.getJSONObject(i)));
             }
             this.steps = new ArrayList<>();
-            JSONArray stepsJA = bake_jason.getJSONArray("steps");
+            JSONArray stepsJA = jsonObjectBaking.getJSONArray("steps");
             for (int i = 0; i < stepsJA.length(); i++) {
                 steps.add(new Step(stepsJA.getJSONObject(i)));
             }
-            this.servings = bake_jason.getString("servings");
-            this.image = bake_jason.getString("image");
+            this.servings = jsonObjectBaking.getString("servings");
+            this.image = jsonObjectBaking.getString("image");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public Baking(){
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setServings(String servings) {
+        this.servings = servings;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -44,14 +60,6 @@ public class Baking {
 
     public String getServings() {
         return servings;
-    }
-
-    public ArrayList<Step> getSteps() {
-        return steps;
-    }
-
-    public ArrayList<Ingredient> getIngredients() {
-        return ingredients;
     }
 }
 

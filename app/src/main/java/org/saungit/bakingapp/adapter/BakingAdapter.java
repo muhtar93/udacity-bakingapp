@@ -30,19 +30,20 @@ public class BakingAdapter extends RecyclerView.Adapter<BakingAdapter.ViewHolder
     private List<Baking> bakingList;
     private Context context;
 
-    public BakingAdapter(List<Baking> agendaList, Context context) {
-        this.bakingList = agendaList;
+    public BakingAdapter(Context context, List<Baking> bakingList) {
         this.context = context;
+        this.bakingList = bakingList;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_baking, parent, false);
+        context = parent.getContext();
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final Baking baking = bakingList.get(position);
         holder.name.setText(baking.getName());
         holder.servings.setText(baking.getServings());
@@ -52,16 +53,6 @@ public class BakingAdapter extends RecyclerView.Adapter<BakingAdapter.ViewHolder
                 .error(R.drawable.chef)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView);
-        holder.setClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent steps = new Intent(context, StepsActivity.class);
-                /*steps.putExtra("name", baking.getName());
-                steps.putExtra("ingredients", baking.getIngredients());
-                steps.putExtra("steps", baking.getSteps());*/
-                context.startActivity(steps);
-            }
-        });
     }
 
     @Override
@@ -84,13 +75,12 @@ public class BakingAdapter extends RecyclerView.Adapter<BakingAdapter.ViewHolder
             itemView.setOnClickListener(this);
         }
 
-        public void setClickListener(ItemClickListener itemClickListener) {
-            this.clickListener = itemClickListener;
-        }
-
         @Override
         public void onClick(View view) {
-            clickListener.onClick(view);
+            int position = getAdapterPosition();
+            Intent intent = new Intent(context, StepsActivity.class);
+            intent.putExtra("item",position);
+            context.startActivity(intent);
         }
     }
 }

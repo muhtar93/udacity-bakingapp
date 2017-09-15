@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import org.saungit.bakingapp.R;
 import org.saungit.bakingapp.model.Baking;
 
@@ -34,7 +32,7 @@ public class BakesAdapter extends RecyclerView.Adapter<BakesAdapter.ArticleViewH
     @Override
     public ArticleViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        int layoutIdForListItem = R.layout.list_item;
+        int layoutIdForListItem = R.layout.list_row_steps;
 
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;

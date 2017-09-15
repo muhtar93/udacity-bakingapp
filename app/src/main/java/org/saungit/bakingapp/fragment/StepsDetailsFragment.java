@@ -9,7 +9,7 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -41,8 +41,8 @@ public class StepsDetailsFragment extends Fragment implements ExoPlayer.EventLis
     private static final String TAG = StepsDetailActivity.class.getSimpleName();
     private View rootView;
     private TextView longDescription;
-    private Button prev;
-    private Button next;
+    private ImageView prev;
+    private ImageView next;
     protected static int index = 0;
     private SimpleExoPlayer exoPlayer;
     private SimpleExoPlayerView playerView;
@@ -59,14 +59,12 @@ public class StepsDetailsFragment extends Fragment implements ExoPlayer.EventLis
         rootView = inflater.inflate(R.layout.fragment_steps_details, container, false);
 
         longDescription = (TextView) rootView.findViewById(R.id.description);
-        prev = (Button) rootView.findViewById(R.id.prev);
-        next = (Button) rootView.findViewById(R.id.next);
+        prev = (ImageView) rootView.findViewById(R.id.prev);
+        next = (ImageView) rootView.findViewById(R.id.next);
 
         playerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
         initializeMediaSession();
-        //for trying exoPlayer
-        //initializePlayer(Uri.parse("http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4"));//unhash this line
-        initializePlayer(Uri.parse(steps.get(index).getVideoURL()));//hash this line
+        initializePlayer(Uri.parse(steps.get(index).getVideoURL()));
 
         if (!isMultiPane) {
             index = getActivity().getIntent().getExtras().getInt("item");
@@ -144,7 +142,7 @@ public class StepsDetailsFragment extends Fragment implements ExoPlayer.EventLis
             exoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
             playerView.setPlayer(exoPlayer);
             exoPlayer.addListener(this);
-            String userAgent = Util.getUserAgent(getContext(), "StepsDetailsFragment");
+            String userAgent = Util.getUserAgent(getContext(), "");
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
             exoPlayer.prepare(mediaSource);

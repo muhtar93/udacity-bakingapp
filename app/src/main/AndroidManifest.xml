@@ -38,7 +38,8 @@
             android:name=".widget.BakingRemoteViewsService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-        <activity android:name=".activity.StepsDetailActivity"></activity>
+        <activity android:name=".activity.StepsDetailActivity" />
+        <activity android:name=".activity.IngredientActivity"></activity>
     </application>
 
 </manifest>

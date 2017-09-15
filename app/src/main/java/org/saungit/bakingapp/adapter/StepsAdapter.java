@@ -16,7 +16,7 @@ import org.saungit.bakingapp.model.Step;
 
 import java.util.ArrayList;
 
-public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ArticleViewHolder> {
+public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHolder> {
 
     final private ListItemClickListener mOnClickListener;
     final private ArrayList<Step> steps;
@@ -31,21 +31,21 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ArticleViewH
     }
 
     @Override
-    public ArticleViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public StepsViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        int layoutIdForListItem = R.layout.list_item;
+        int layoutIdForListItem = R.layout.list_row_steps;
 
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        ArticleViewHolder viewHolder = new ArticleViewHolder(view);
+        StepsViewHolder viewHolder = new StepsViewHolder(view);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ArticleViewHolder holder, int position) {
+    public void onBindViewHolder(StepsViewHolder holder, int position) {
         holder.onBind(position);
     }
 
@@ -54,7 +54,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ArticleViewH
         return steps.size();
     }
 
-    class ArticleViewHolder extends RecyclerView.ViewHolder
+    class StepsViewHolder extends RecyclerView.ViewHolder
             implements OnClickListener {
 
         ImageView icon;
@@ -62,12 +62,11 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ArticleViewH
         TextView servings;
 
 
-        public ArticleViewHolder(View itemView) {
+        public StepsViewHolder(View itemView) {
             super(itemView);
 
             icon = (ImageView) itemView.findViewById(R.id.icon);
             name = (TextView) itemView.findViewById(R.id.name);
-            servings = (TextView) itemView.findViewById(R.id.servings);
             itemView.setOnClickListener(this);
         }
 
@@ -79,7 +78,6 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.ArticleViewH
                     icon.setImageResource(R.drawable.chef);
                 }
                 name.setText(steps.get(position).getShortDescription());
-                servings.setText(itemView.getContext().getString(R.string.step)+" "+steps.get(position).getId());
             }
         }
 

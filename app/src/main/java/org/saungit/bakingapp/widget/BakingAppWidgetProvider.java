@@ -10,6 +10,7 @@ import android.widget.RemoteViews;
 
 import org.saungit.bakingapp.R;
 import org.saungit.bakingapp.activity.MainActivity;
+import org.saungit.bakingapp.activity.StepsActivity;
 
 public class BakingAppWidgetProvider extends AppWidgetProvider {
 
@@ -24,7 +25,7 @@ public class BakingAppWidgetProvider extends AppWidgetProvider {
             Intent intent = new Intent(context, BakingRemoteViewsService.class);
             views.setRemoteAdapter(R.id.widgetListView, intent);
 
-            Intent clickIntentTemplate = new Intent(context, MainActivity.class);
+            Intent clickIntentTemplate = new Intent(context, StepsActivity.class);
             PendingIntent clickPendingIntentTemplate = PendingIntent.getActivity(context, 0, clickIntentTemplate, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.widgetListView, clickPendingIntentTemplate);
 

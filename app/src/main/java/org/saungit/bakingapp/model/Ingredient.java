@@ -3,17 +3,20 @@ package org.saungit.bakingapp.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class Ingredient {
 
     private double quantity;
     private String measure;
     private String ingredient;
+    private ArrayList<Ingredient> ingredientArrayList;
 
-    public Ingredient(JSONObject ingredient_jason) {
+    public Ingredient(JSONObject jsonObjectIngredient) {
         try {
-            this.quantity = ingredient_jason.getDouble("quantity");
-            this.measure = ingredient_jason.optString("measure");
-            this.ingredient = ingredient_jason.optString("ingredient");
+            this.quantity = jsonObjectIngredient.getDouble("quantity");
+            this.measure = jsonObjectIngredient.optString("measure");
+            this.ingredient = jsonObjectIngredient.optString("ingredient");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -29,6 +32,14 @@ public class Ingredient {
 
     public String getIngredient() {
         return ingredient;
+    }
+
+    public void setIngredientArrayList(ArrayList<Ingredient> ingredientArrayList) {
+        this.ingredientArrayList = ingredientArrayList;
+    }
+
+    public ArrayList<Ingredient> getIngredientArrayList() {
+        return ingredientArrayList;
     }
 }
 

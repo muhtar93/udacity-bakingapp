@@ -9,24 +9,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.saungit.bakingapp.R;
+import org.saungit.bakingapp.activity.IngredientActivity;
 import org.saungit.bakingapp.activity.MainActivity;
 import org.saungit.bakingapp.activity.StepsDetailActivity;
-import org.saungit.bakingapp.adapter.IngredientsAdapter;
 import org.saungit.bakingapp.adapter.StepsAdapter;
 import org.saungit.bakingapp.model.Step;
 
 import java.util.ArrayList;
 
-import static org.saungit.bakingapp.fragment.BakesFragment.bakes;
-
 public class StepsFragment extends Fragment implements StepsAdapter.ListItemClickListener {
 
     private RecyclerView stepsRecyclerView;
-    private RecyclerView ingredientRecyclerView;
+    private TextView textIngredient;
+
     private StepsAdapter stepsAdapter;
-    private IngredientsAdapter ingredientsAdapter;
 
     private View rootView;
     private int index = 0;
@@ -36,18 +35,25 @@ public class StepsFragment extends Fragment implements StepsAdapter.ListItemClic
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.steps_fragment, container, false);
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_steps, container, false);
         stepsRecyclerView = (RecyclerView) rootView.findViewById(R.id.stepslist);
-        ingredientRecyclerView = (RecyclerView) rootView.findViewById(R.id.ingredientslist);
+        textIngredient = (TextView) rootView.findViewById(R.id.textIngredient);
         stepsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         index = getActivity().getIntent().getExtras().getInt(getString(R.string.extra));
-        steps = bakes.get(index).getSteps();
+        steps = MainFragment.stepArrayList.get(index).getStepsArrayList();
         stepsAdapter = new StepsAdapter(this, steps);
-        ingredientsAdapter = new IngredientsAdapter(bakes.get(index).getIngredients());
         stepsRecyclerView.setAdapter(stepsAdapter);
-        ingredientRecyclerView.setAdapter(ingredientsAdapter);
+
+        textIngredient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), IngredientActivity.class);
+                intent.putExtra("data", index);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
